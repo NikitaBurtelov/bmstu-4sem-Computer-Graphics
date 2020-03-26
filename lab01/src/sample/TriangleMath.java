@@ -32,8 +32,10 @@ public class TriangleMath {
         dataPointOne = getTriangle(absDataPointOne, ordDataPointOne, dataPointOne);
         dataPointTwo = getTriangle(absDataPointTwo, ordDataPointTwo, dataPointTwo);
 
-        if (dataPointOne.length == 0 || dataPointTwo.length == 0)
-            return false;
+        System.out.println("HEr" + dataPointOne[0][0][0]);
+
+        //if (dataPointOne.length == 0 || dataPointTwo.length == 0)
+          //  return false;
 
         for (int i = 0; i < dataPointOne.length; i++) {
             for (int j = 0; j < dataPointTwo.length; j++) {
@@ -61,20 +63,20 @@ public class TriangleMath {
 
     double[][][] getTriangle(double[] absDataPoint, double[] ordDataPoint, double[][][] dataPoint) {
         double x1, x2, x3, y1, y2, y3, id;
-        int count = 0;
+        boolean flag = false;
         double[][] dataCord = new double[3][2];
 
         for (int i = 0; i < absDataPoint.length - 2; i++) {
             x1 = absDataPoint[i];
             y1 = ordDataPoint[i];
             for (int j = i + 1; j < absDataPoint.length - 1; j++) {
-                x2 = absDataPoint[i];
-                y2 = ordDataPoint[i];
+                x2 = absDataPoint[j];
+                y2 = ordDataPoint[j];
                 for (int k = j + 1; k < absDataPoint.length; k++) {
-                    x3 = absDataPoint[i];
-                    y3 = ordDataPoint[i];
+                    x3 = absDataPoint[k];
+                    y3 = ordDataPoint[k];
 
-                    if (checkExist(x1, x2, x3, y1, y2, y3)) {
+                    if (true) {
                         id = getObtuseAngle(x1, x2, x3, y1, y2, y3);
 
                         if (id == 1)
@@ -84,8 +86,15 @@ public class TriangleMath {
                         else if (id == 3)
                             dataCord = setArr(x3, y3, x1, y1, x2, y2, dataCord);
 
-                        if (id != -1)
-                            dataPoint = appendArr(dataPoint, dataCord);
+                        if (id != -1) {
+                            if (flag)
+                                dataPoint = appendArr(dataPoint, dataCord);
+                            else {
+                                double[][][] dataPointNow = new double[1][3][2];
+                                dataPoint = appendArr(dataPointNow, dataCord);
+                                flag = true;
+                            }
+                        }
                     }
                 }
             }
@@ -144,9 +153,15 @@ public class TriangleMath {
     // dataPoint - данные о треугольнике мн-ва 1 или мн-ва 2
     // dataPoint = dataPointOne or dataPointTwo
     double[][][] appendArr(double[][][] dataPoint, double[][] dataCoord) {
-        double[][][] arr = new double[dataPoint.length + 1][3][2];
+       double[][][] arr = new double[dataPoint.length + 1][3][2];
 
-        arr = Arrays.copyOf(dataPoint, dataPoint.length);
+        for (int i = 0; i < dataPoint.length; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 2; k++) {
+                    arr[i][j][k] = dataPoint[i][j][k];
+                }
+            }
+        }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
