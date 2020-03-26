@@ -1,9 +1,8 @@
 package sample;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class TriangleMath {
+ public class TriangleMath {
     TriangleMath (double[] arrX1, double[] arrY1, double[] arrX2, double[] arrY2) {
         this.absDataPointOne = arrX1;
         this.ordDataPointOne = arrY1;
@@ -17,13 +16,10 @@ public class TriangleMath {
     double[][][] dataPointOne; //тупо-ый треугольник по точкам мн-ва 1
     double[][][] dataPointTwo; //тупо-ый треугольник по точкам мн-ва 2
 
-    private double maxAngle = -1000; //Искомый угол
+    double maxAngle = -1000; //Искомый угол
     private double eps = 0.00001;
     double[][] dataTriangleOne;
     double[][] dataTriangleTwo;
-
-    //int[] arrSideLenOne; //длина сторон 1
-    //int[] arrSideLenTwo; //длина сторон 2
 
     boolean trianglesSearch() {
         double angle;
@@ -32,10 +28,8 @@ public class TriangleMath {
         dataPointOne = getTriangle(absDataPointOne, ordDataPointOne, dataPointOne);
         dataPointTwo = getTriangle(absDataPointTwo, ordDataPointTwo, dataPointTwo);
 
-        System.out.println("HEr" + dataPointOne[0][0][0]);
-
-        //if (dataPointOne.length == 0 || dataPointTwo.length == 0)
-          //  return false;
+        if (dataPointOne.length == 0 || dataPointTwo.length == 0)
+            return false;
 
         for (int i = 0; i < dataPointOne.length; i++) {
             for (int j = 0; j < dataPointTwo.length; j++) {
@@ -61,7 +55,7 @@ public class TriangleMath {
             return false;
     }
 
-    double[][][] getTriangle(double[] absDataPoint, double[] ordDataPoint, double[][][] dataPoint) {
+    private double[][][] getTriangle(double[] absDataPoint, double[] ordDataPoint, double[][][] dataPoint) {
         double x1, x2, x3, y1, y2, y3, id;
         boolean flag = false;
         double[][] dataCord = new double[3][2];
@@ -76,7 +70,7 @@ public class TriangleMath {
                     x3 = absDataPoint[k];
                     y3 = ordDataPoint[k];
 
-                    if (true) {
+                    if (checkExist(x1, x2, x3, y1, y2, y3)) {
                         id = getObtuseAngle(x1, x2, x3, y1, y2, y3);
 
                         if (id == 1)
@@ -101,20 +95,19 @@ public class TriangleMath {
         }
         return dataPoint;
     }
-    double[][] setArr(double x1, double y1, double x2, double y2, double x3, double y3, double[][] dataCord) {
+
+    private double[][] setArr(double x1, double y1, double x2, double y2, double x3, double y3, double[][] dataCord) {
         dataCord[0][0] = x1;
         dataCord[0][1] = y1;
-
         dataCord[1][0] = x2;
         dataCord[1][1] = y2;
-
         dataCord[2][0] = x3;
         dataCord[2][1] = y3;
 
         return dataCord;
     }
     //Проверка на существование треугольника
-    boolean checkExist (double x1, double x2, double x3, double y1, double y2, double y3) {
+    private boolean checkExist (double x1, double x2, double x3, double y1, double y2, double y3) {
         double s = Math.abs((x1 - x2) * (y2 - y3) - (x2 - x3) * (y1 - y3));
 
         if (s - 0.00001 >= eps)
@@ -123,7 +116,7 @@ public class TriangleMath {
         return false;
     }
     //проверка на наличие тупого угла
-    int getObtuseAngle(double x1, double x2, double x3, double y1, double y2, double y3) {
+    private int getObtuseAngle(double x1, double x2, double x3, double y1, double y2, double y3) {
         int index = -1;
         double a = Math.pow(getSideLength(x2, x3, y2, y3), 2);
         double b = Math.pow(getSideLength(x1, x3, y1, y3), 2);
@@ -138,21 +131,14 @@ public class TriangleMath {
 
         return index;
     }
-
     //Подсчет длин сторон
-    double getSideLength (double x1, double x2, double y1, double y2) {
+    private double getSideLength (double x1, double x2, double y1, double y2) {
         return Math.sqrt(Math.abs((x1 - x2)*(x1 - x2) - (y1 - y2)*(y1 - y2)));
-    }
-    //Поиск угла между осью ОХ и прямой
-    double angleSearch() {
-        double angle = 0d;
-
-        return angle;
     }
     //Добавление данных о треугольнике в конец массива
     // dataPoint - данные о треугольнике мн-ва 1 или мн-ва 2
     // dataPoint = dataPointOne or dataPointTwo
-    double[][][] appendArr(double[][][] dataPoint, double[][] dataCoord) {
+    private double[][][] appendArr(double[][][] dataPoint, double[][] dataWord) {
        double[][][] arr = new double[dataPoint.length + 1][3][2];
 
         for (int i = 0; i < dataPoint.length; i++) {
@@ -165,7 +151,7 @@ public class TriangleMath {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
-                arr[dataPoint.length][i][j] = dataCoord[i][j];
+                arr[dataPoint.length][i][j] = dataWord[i][j];
             }
         }
 
