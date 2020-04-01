@@ -28,15 +28,6 @@ import java.util.Arrays;
         dataPointOne = getTriangle(absDataPointOne, ordDataPointOne, dataPointOne);
         dataPointTwo = getTriangle(absDataPointTwo, ordDataPointTwo, dataPointTwo);
 
-        System.out.println("Ne final 1");
-        for (int i = 0; i < dataPointOne[0][0].length; i++) {
-            System.out.println(dataPointOne[0][i][0] + " " + dataPointOne[0][i][1]);
-        }
-        System.out.println("Ne final 2");
-        for (int i = 0; i < dataPointTwo.length; i++) {
-            System.out.println(dataPointTwo[0][i][0] + " " + dataPointTwo[0][i][1]);
-        }
-
         if (dataPointOne.length == 0 || dataPointTwo.length == 0)
             return false;
 
@@ -55,7 +46,6 @@ import java.util.Arrays;
                     idOne = i;
                     idTwo = j;
                 }
-
             }
         }
         if (idOne != -1 & idTwo != -1) {

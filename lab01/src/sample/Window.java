@@ -5,7 +5,6 @@ import com.github.sh0nk.matplotlib4j.builder.HistBuilder;
 import com.github.sh0nk.matplotlib4j.builder.ScaleBuilder;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -100,18 +99,6 @@ public class Window extends Application {
     private void drawTriangle(double[][] dataArrOne, double[][] dataArrTwo) {
         try {
             Plot plt = Plot.create();
-            System.out.println("Final 1");
-
-            for (int i = 0; i < dataArrOne.length; i++) {
-                System.out.println(dataArrOne[i][0] + " " + dataArrOne[i][1]);
-            }
-
-            System.out.println("Final 2");
-
-            for (int i = 0; i < dataArrTwo.length; i++) {
-                System.out.println(dataArrTwo[i][0] + " " + dataArrTwo[i][1]);
-            }
-
 
             plt.plot()
                     .add(Arrays.asList(dataArrOne[0][0], dataArrOne[1][0], dataArrOne[2][0], dataArrOne[0][0]),
@@ -240,8 +227,6 @@ public class Window extends Application {
                 textAreaTwo.clear();
             }
         });
-        textAreaTwo.setText("0 0, 0 9, 9 0");
-        textAreaOne.setText("10.2 0, 23 67, 9.3 0");
 
         pane.getChildren().addAll(runBtn, cleanBtn, textAreaOne,
                 textAreaTwo, line, label1, label2);
@@ -249,13 +234,5 @@ public class Window extends Application {
 
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("Точки множества B не образуют подходящего треугольника");
-
-        alert.showAndWait();
     }
 }
