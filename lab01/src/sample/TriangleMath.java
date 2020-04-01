@@ -28,6 +28,15 @@ import java.util.Arrays;
         dataPointOne = getTriangle(absDataPointOne, ordDataPointOne, dataPointOne);
         dataPointTwo = getTriangle(absDataPointTwo, ordDataPointTwo, dataPointTwo);
 
+        System.out.println("Ne final 1");
+        for (int i = 0; i < dataPointOne[0][0].length; i++) {
+            System.out.println(dataPointOne[0][i][0] + " " + dataPointOne[0][i][1]);
+        }
+        System.out.println("Ne final 2");
+        for (int i = 0; i < dataPointTwo.length; i++) {
+            System.out.println(dataPointTwo[0][i][0] + " " + dataPointTwo[0][i][1]);
+        }
+
         if (dataPointOne.length == 0 || dataPointTwo.length == 0)
             return false;
 
@@ -35,6 +44,9 @@ import java.util.Arrays;
             for (int j = 0; j < dataPointTwo.length; j++) {
                 angle = Math.atan((double) (dataPointOne[i][0][1] - dataPointTwo[j][0][1])
                         / (double) (dataPointOne[i][0][0] - dataPointTwo[j][0][0]));
+                angle = Math.toDegrees(angle);
+                angle = Math.abs(angle);
+                System.out.println(angle);
                 if (180 - 2 * angle > eps)
                     angle = 180 - angle;
 
@@ -84,15 +96,10 @@ import java.util.Arrays;
                             if (flag)
                                 dataPoint = appendArr(dataPoint, dataCord);
                             else {
-                                double[][][] dataPointNow = new double[1][3][2];
+                                double[][][] dataPointNow = new double[0][3][2];
                                 dataPoint = appendArr(dataPointNow, dataCord);
                                 flag = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+                            } } } } } }
         return dataPoint;
     }
 
