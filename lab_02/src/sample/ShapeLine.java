@@ -11,21 +11,21 @@ import java.io.IOException;
 public class ShapeLine {
     private double[] arrStart;
     private Color color;
-    double cutOne;
-    double cutTwo;
+    //private double cutOne;
+    //private double cutTwo;
 
     /**
      * Конструктор - создание нового объекта с определенными значениями
      * @param arrPlace - координаты начальной и конечной позиции отрезка
      * */
-    ShapeLine(double[] arrPlace, Color color, double cutOne, double cutTwo){
+    ShapeLine(double[] arrPlace, Color color){ //double cutOne, double cutTwo
         this.arrStart = arrPlace;
         this.color = color;
-        this.cutOne = cutOne;
-        this.cutTwo = cutTwo;
+        //this.cutOne = cutOne;
+        //this.cutTwo = cutTwo;
     }
 
-    Line drawLine(double[] arrPlace) throws IOException {
+    Line drawLine(double[] arrPlace){
         Line line = new Line(arrPlace[0], arrPlace[1], arrPlace[2], arrPlace[3]);
         line.setStroke(color);
         line.setStrokeWidth(1);
@@ -33,27 +33,59 @@ public class ShapeLine {
         return line;
     }
 
-//    double[] moveLine(double[] arrPlace, double[] arrOffset) {
-//        Line line = new Line(arrPlace[0] , arrPlace[1], arrPlace[2], arrPlace[3]);
-//        line.setStroke(color);
-//        line.setStrokeWidth(1);
-//
-//        return line;
-//
-//
-//        System.out.println(arrStart[0]);
-//        return arrPlace;
-//    }
+    Line moveLine(double[] arrPlace, double[] arrOffset) {
+        double dxOne, dyOne, dxTwo, dyTwo;
 
-    double[] scaleLine(double[] arrPlace, double size) {
-        double[] arrLine = new double[arrPlace.length];
+        dxOne = arrOffset[0] - arrPlace[0];
+        dyOne = arrOffset[1] - arrPlace[1];
+        dxTwo = arrOffset[2] - arrPlace[2];
+        dyTwo = arrOffset[3] - arrPlace[3];
 
-        return arrPlace;
+        Line line = new Line(arrPlace[0] + dxOne, arrPlace[1] + dyOne,
+                arrPlace[2] + dxTwo, arrPlace[3] + dyTwo);
+
+        line.setStroke(color);
+        line.setStrokeWidth(1);
+
+        return line;
     }
 
-    double[] rotateLine(double[] arrPlace, double size) {
-        double[] arrLine = new double[arrPlace.length];
 
-        return arrPlace;
+    Line scaleLine(double[] arrPlace, double size, double[] centerPlace) {
+        double x1, y1, x2, y2;
+
+        x1 = arrPlace[0] * size + (1 - size) * centerPlace[0];
+        x2 = arrPlace[2] * size + (1 - size) * centerPlace[0];
+
+        y1 = arrPlace[1] * size + (1 - size) * centerPlace[1];
+        y2 = arrPlace[3] * size + (1 - size) * centerPlace[1];
+
+        Line line = new Line(x1, y1, x2, y2);
+
+        line.setStroke(color);
+        line.setStrokeWidth(1);
+
+
+        return line;
+    }
+
+    Line rotateLine(double[] arrPlace, double angle, double[] centerPlace) {
+        double x1, y1, x2, y2;
+
+        x1 = centerPlace[0] + (arrPlace[0] - centerPlace[0]) * Math.cos(angle)
+                + (arrPlace[1] - centerPlace[1]) * Math.sin(angle);
+        x2 = centerPlace[0] + (arrPlace[2] - centerPlace[0]) * Math.cos(angle)
+                + (arrPlace[3] - centerPlace[1]) * Math.sin(angle);
+        y1 = centerPlace[1] + (arrPlace[1] - centerPlace[1]) * Math.cos(angle)
+                + (arrPlace[0] - centerPlace[1]) * Math.sin(angle);
+        y2 = centerPlace[1] + (arrPlace[3] - centerPlace[1]) * Math.cos(angle)
+                + (arrPlace[2] - centerPlace[1]) * Math.sin(angle);
+
+        Line line = new Line(x1, y1, x2, y2);
+
+        line.setStroke(color);
+        line.setStrokeWidth(1);
+
+        return line;
     }
 }
