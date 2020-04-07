@@ -21,7 +21,7 @@ public class ShapeArc {
     //angle - startAngle
     //Length
     //radArr
-    private Arc drawArc(double[] dataArr, double angle, double len, double[] radArr) {
+    Arc drawArc(double[] dataArr, double angle, double len, double[] radArr) {
         Arc arc = new Arc();
 
         arc.setCenterX(dataArr[0]);
@@ -37,7 +37,7 @@ public class ShapeArc {
         return arc;
     }
     //moveArr - dx and dy
-    private Pane moveArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double[] moveArr) {
+    Pane moveArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double[] moveArr) {
         dataArr[0] += moveArr[0];
         dataArr[1] += moveArr[1];
         this.arrStart[0] += moveArr[0];
@@ -48,7 +48,7 @@ public class ShapeArc {
         return pane;
     }
 
-    private Pane rotateArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double rotAngle) {
+    Pane rotateArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double rotAngle) {
         angle += rotAngle;
         double x, y;
 
@@ -66,7 +66,7 @@ public class ShapeArc {
         return pane;
     }
     //scaleArr - kx, ky
-    private Pane scaleArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double[] sizeArr) {
+    Pane scaleArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double[] sizeArr) {
         double x, y;
         x = dataArr[0] - radArr[0];
         y = dataArr[1] - radArr[1];

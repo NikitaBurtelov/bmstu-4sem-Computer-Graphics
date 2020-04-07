@@ -31,10 +31,16 @@ public class Main extends Application {
     }
 
     private Pane drawShape(Pane pane) {
-        //ShapeLine shapeLine = new ShapeLine(start, Color.BLACK);
-        double[] arr = new double[] {10, 10, start[0], start[1]};
+        ShapeLine shapeLine = new ShapeLine(start, Color.BLACK);
         ShapeBox shapeBox = new ShapeBox(start, Color.BLACK, 10, 10);
-        pane = shapeBox.drawBox(pane, arr);
+        ShapeArc shapeArc = new ShapeArc(headColor, start);
+        double[] arr = new double[] {200, 200, start[0], start[1]};
+
+        shapeBox.drawBox(pane, arr);
+        shapeBox.drawRhomb(pane, arr);
+        pane.getChildren().add(shapeArc.drawArc(new double[] {275, 235}, 90, 360, new double[] {15, 15})); //double[] dataArr, double angle, double len, double[] radArr
+        pane.getChildren().add(shapeArc.drawArc(new double[] {200, 235}, 90, 180, new double[] {20, 35}));
+        pane.getChildren().add(shapeArc.drawArc(new double[] {start[0], 235}, -90, 180, new double[] {20, 35}));
 
         return pane;
     }
