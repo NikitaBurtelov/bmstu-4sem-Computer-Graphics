@@ -3,15 +3,17 @@ package sample;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -21,9 +23,16 @@ import java.io.IOException;
 
 public class Main extends Application {
     Group root = new Group();
+    Color headColor = Color.rgb(245, 245, 245);
+    double[] start = new double[] {350, 270};
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private drawShape(Pane pane) {
+
+        return pane;
     }
 
     private void readTextArea(TextArea taOne, TextArea taTwo) {
@@ -79,6 +88,20 @@ public class Main extends Application {
         BorderPane root = new BorderPane();//FXMLLoader.load(getClass().getResource("sample.fxml"));
         Pane pane = new Pane();
 
+        Arc arc = new Arc();
+
+        arc.setCenterX(350.0f);
+        arc.setCenterY(270.0f);
+        arc.setRadiusX(120.0f);
+        arc.setRadiusY(90.0f);
+        arc.setStartAngle(90.0f);
+        arc.setFill(headColor);
+        arc.setStroke(Color.BLACK);
+        arc.setLength(180.0f * 2);
+        arc.setType(ArcType.OPEN);
+
+        pane.getChildren().add(arc);
+
         primaryStage.setTitle("Lab_01");
 
         TextArea textAreaOne = new TextArea("Перенос");
@@ -125,6 +148,8 @@ public class Main extends Application {
         pane.getChildren().addAll(runBtn, cleanBtn, textAreaOne,
                 textAreaTwo, textAreaThree, line, label1, label2, label3);
         root.setTop(pane);
+
+        root.setBackground(new Background(new BackgroundFill(this.headColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
         primaryStage.setScene(new Scene(root, 920, 600));
         primaryStage.show();

@@ -50,7 +50,6 @@ public class ShapeLine {
         return line;
     }
 
-
     Line scaleLine(double[] arrPlace, double size, double[] centerPlace) {
         double x1, y1, x2, y2;
 
