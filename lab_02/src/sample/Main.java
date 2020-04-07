@@ -30,7 +30,11 @@ public class Main extends Application {
         launch(args);
     }
 
-    private drawShape(Pane pane) {
+    private Pane drawShape(Pane pane) {
+        //ShapeLine shapeLine = new ShapeLine(start, Color.BLACK);
+        double[] arr = new double[] {10, 10, start[0], start[1]};
+        ShapeBox shapeBox = new ShapeBox(start, Color.BLACK, 10, 10);
+        pane = shapeBox.drawBox(pane, arr);
 
         return pane;
     }
@@ -88,19 +92,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();//FXMLLoader.load(getClass().getResource("sample.fxml"));
         Pane pane = new Pane();
 
-        Arc arc = new Arc();
-
-        arc.setCenterX(350.0f);
-        arc.setCenterY(270.0f);
-        arc.setRadiusX(120.0f);
-        arc.setRadiusY(90.0f);
-        arc.setStartAngle(90.0f);
-        arc.setFill(headColor);
-        arc.setStroke(Color.BLACK);
-        arc.setLength(180.0f * 2);
-        arc.setType(ArcType.OPEN);
-
-        pane.getChildren().add(arc);
+        pane = drawShape(pane);
 
         primaryStage.setTitle("Lab_01");
 

@@ -28,7 +28,7 @@ public class ShapeBox extends Application{
         this.cutTwo = cutTwo;
     }
 
-    private Pane drawBox(Pane pane, double[] arrPlace) throws IOException {
+    Pane drawBox(Pane pane, double[] arrPlace){
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrBox(arrPlace);
 
