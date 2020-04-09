@@ -12,7 +12,7 @@ import javax.imageio.IIOException;
 import java.io.IOException;
 
 public class ShapeBox extends Application{
-    private double[] arrStart;
+    double[] arrStart;
     private Color color;
     private double cutOne;
     private double cutTwo;
@@ -70,6 +70,8 @@ public class ShapeBox extends Application{
         x3 = arrPlace[0];
         y3 = y4 = (arrPlace[1] + arrPlace[3]) * 0.5;
         x4 = arrPlace[2];
+        //this.arrStart[0] = x1;
+        //this.arrStart[1] = y3;
 
         double[][] arr = new double[][] {
                 {x1, y1, x3, y3},
@@ -119,9 +121,12 @@ public class ShapeBox extends Application{
     Pane scaleRhomb(Pane pane, double[] arrPlace, double size, double[] centerPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrRhomb(arrPlace);
+        System.out.println("\nRhomd\n");
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) {
+            System.out.println(arr[i][0] + " " + arr[i][1] + " " + arr[i][2] + " " + arr[i][3]);
             pane.getChildren().addAll(shapeLine.scaleLine(arr[i], size, centerPlace));
+        }
 
         return pane;
     }

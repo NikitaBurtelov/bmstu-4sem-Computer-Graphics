@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ShapeLine {
     private double[] arrStart;
@@ -19,7 +20,7 @@ public class ShapeLine {
      * @param arrPlace - координаты начальной и конечной позиции отрезка
      * */
     ShapeLine(double[] arrPlace, Color color){ //double cutOne, double cutTwo
-        this.arrStart = arrPlace;
+        this.arrStart = Arrays.copyOf(arrPlace, arrPlace.length);
         this.color = color;
         //this.cutOne = cutOne;
         //this.cutTwo = cutTwo;
@@ -36,13 +37,13 @@ public class ShapeLine {
     Line moveLine(double[] arrPlace, double[] arrOffset) {
         double dxOne, dyOne, dxTwo, dyTwo;
 
-        dxOne = arrOffset[0] - arrPlace[0];
-        dyOne = arrOffset[1] - arrPlace[1];
-        dxTwo = arrOffset[2] - arrPlace[2];
-        dyTwo = arrOffset[3] - arrPlace[3];
+        dxOne = arrOffset[0];// - arrPlace[0];
+        dyOne = arrOffset[1];// - arrPlace[1];
+        //dxTwo = arrOffset[2] - arrPlace[2];
+        //dyTwo = arrOffset[3] - arrPlace[3];
 
         Line line = new Line(arrPlace[0] + dxOne, arrPlace[1] + dyOne,
-                arrPlace[2] + dxTwo, arrPlace[3] + dyTwo);
+                arrPlace[2] + dxOne, arrPlace[3] + dyOne);
 
         line.setStroke(color);
         line.setStrokeWidth(1);

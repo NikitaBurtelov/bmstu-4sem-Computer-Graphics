@@ -10,11 +10,11 @@ import java.util.Arrays;
 
 public class ShapeArc {
     private Color arcColor;
-    private double[] arrStart;
+    double[] arrStart;
 
     ShapeArc(Color color, double[] arrStart) {
         this.arcColor = color;
-        this.arrStart = arrStart;
+        this.arrStart = Arrays.copyOf(arrStart, arrStart.length);
     }
 
     //dataArr - массив, содержит координаты центра,
@@ -66,18 +66,22 @@ public class ShapeArc {
         return pane;
     }
     //scaleArr - kx, ky
-    Pane scaleArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double[] sizeArr) {
+    Pane scaleArc(Pane pane, double[] dataArr, double angle, double len, double[] radArr, double[] sizeArr, double[] centerPlace) {
         double x, y;
+        System.out.println("arc");
+        for (int i = 0; i < dataArr.length; i++)
+            System.out.println("i: " + i + " " + dataArr[i]);
+
         x = dataArr[0] - radArr[0];
         y = dataArr[1] - radArr[1];
 
         x = x * sizeArr[0] + (1 - sizeArr[0]) * arrStart[0];
         y = y * sizeArr[1] + (1 - sizeArr[1]) * arrStart[1];
 
-        radArr[0] = dataArr[0] - x; //rx
-        radArr[1] = dataArr[1] - y; //ry
+        radArr[0] *= sizeArr[0]; //rx
+        radArr[1] *= sizeArr[1]; //ry
         dataArr[0] = dataArr[0] * sizeArr[0] + (1 - sizeArr[0]) * arrStart[0];
-        dataArr[1] = dataArr[1] * sizeArr[1] + (1 - sizeArr[1]) * arrStart[0];
+        dataArr[1] = dataArr[1] * sizeArr[1] + (1 - sizeArr[1]) * arrStart[1];
 
         pane.getChildren().add(drawArc(dataArr, angle, len, radArr));
 
