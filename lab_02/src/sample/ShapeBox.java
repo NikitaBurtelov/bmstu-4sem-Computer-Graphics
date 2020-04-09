@@ -12,7 +12,7 @@ import javax.imageio.IIOException;
 import java.io.IOException;
 
 public class ShapeBox extends Application{
-    private double[] arrStart;
+    double[] arrStart;
     private Color color;
     private double cutOne;
     private double cutTwo;
@@ -28,7 +28,7 @@ public class ShapeBox extends Application{
         this.cutTwo = cutTwo;
     }
 
-    private Pane drawBox(Pane pane, double[] arrPlace) throws IOException {
+    Pane drawBox(Pane pane, double[] arrPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrBox(arrPlace);
 
@@ -38,7 +38,7 @@ public class ShapeBox extends Application{
         return pane;
     }
 
-    private Pane drawRhomb(Pane pane, double[] arrPlace) throws IOException {
+    Pane drawRhomb(Pane pane, double[] arrPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrRhomb(arrPlace);
 
@@ -64,12 +64,14 @@ public class ShapeBox extends Application{
     private double[][] getArrRhomb(double[] arrPlace) {
         double x1, x2, x3, x4, y1, y2, y3, y4;
 
-        x1 = x2 = (arrPlace[0] + arrPlace[1]) * 0.5; // K
+        x1 = x2 = (arrPlace[0] + arrPlace[2]) * 0.5; // K
         y1 = arrPlace[1];
         y2 = arrPlace[3];
         x3 = arrPlace[0];
         y3 = y4 = (arrPlace[1] + arrPlace[3]) * 0.5;
         x4 = arrPlace[2];
+        //this.arrStart[0] = x1;
+        //this.arrStart[1] = y3;
 
         double[][] arr = new double[][] {
                 {x1, y1, x3, y3},
@@ -80,10 +82,13 @@ public class ShapeBox extends Application{
 
         System.out.println(arr.length);
 
+        for (int i = 0; i < arr.length; i++)
+            System.out.println(arr[i][0] + " " + arr[i][1] + " " + arr[i][2] + " " + arr[i][3]);
+
         return arr;
     }
 
-    private Pane moveBox(Pane pane, double[] arrPlace, double[] arrOffset) {
+    Pane moveBox(Pane pane, double[] arrPlace, double[] arrOffset) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrBox(arrPlace);
 
@@ -93,7 +98,7 @@ public class ShapeBox extends Application{
         return pane;
     }
 
-    private Pane moveRhomb(Pane pane, double[] arrPlace, double[] arrOffset) {
+    Pane moveRhomb(Pane pane, double[] arrPlace, double[] arrOffset) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrRhomb(arrPlace);
 
@@ -103,7 +108,7 @@ public class ShapeBox extends Application{
         return pane;
     }
 
-    private Pane scaleBox(Pane pane, double[] arrPlace, double size, double[] centerPlace) {
+    Pane scaleBox(Pane pane, double[] arrPlace, double size, double[] centerPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrBox(arrPlace);
 
@@ -113,17 +118,20 @@ public class ShapeBox extends Application{
         return pane;
     }
 
-    private Pane scaleRhomb(Pane pane, double[] arrPlace, double size, double[] centerPlace) {
+    Pane scaleRhomb(Pane pane, double[] arrPlace, double size, double[] centerPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrRhomb(arrPlace);
+        System.out.println("\nRhomd\n");
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) {
+            System.out.println(arr[i][0] + " " + arr[i][1] + " " + arr[i][2] + " " + arr[i][3]);
             pane.getChildren().addAll(shapeLine.scaleLine(arr[i], size, centerPlace));
+        }
 
         return pane;
     }
 
-    private Pane rotateBox(Pane pane, double[] arrPlace, double angle, double[] centerPlace) {
+    Pane rotateBox(Pane pane, double[] arrPlace, double angle, double[] centerPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrBox(arrPlace);
 
@@ -133,7 +141,7 @@ public class ShapeBox extends Application{
         return pane;
     }
 
-    private Pane rotateRhomb(Pane pane, double[] arrPlace, double angle, double[] centerPlace) {
+    Pane rotateRhomb(Pane pane, double[] arrPlace, double angle, double[] centerPlace) {
         ShapeLine shapeLine = new ShapeLine(this.arrStart, this.color);
         double[][] arr = getArrRhomb(arrPlace);
 
